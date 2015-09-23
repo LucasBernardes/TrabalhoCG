@@ -71,3 +71,17 @@ def cartesiano(M):
             Mc[i][j] = M[i][j]/M[3][j]
 
     return Mc
+
+def mMatrizes(A, B):
+    size = len(A)
+    M[size][size]
+
+    for i in range(size):
+        for j in range(size):
+            soma = 0
+            for k in range(size):
+                soma += A[i][k] * B[k][j]
+
+            M[i][j] = soma
+
+    return M
