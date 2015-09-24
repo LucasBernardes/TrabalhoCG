@@ -13,8 +13,8 @@ def calculoD(N, P, C):
     return (d0, d1, d)
 
 def matPersp(N, C, d, d0):
-    M[4][4]
-
+    M = [[0.0 for i in range(4)] for j in range(4)]
+    
     M[0][0] = d + C[0] * N[0]
     M[0][1] = C[0] * N[0]
     M[0][2] = C[0] * N[2]
@@ -38,7 +38,7 @@ def matPersp(N, C, d, d0):
     return M
 
 def matPar(N, C, d0, d1):
-    M[4][4]
+    M = [[0.0 for i in range(4)] for j in range(4)]
 
     M[0][0] = d1 + C[0] * N[0]
     M[0][1] = -C[0] * N[1]
@@ -75,11 +75,12 @@ def cartesiano(M):
 def mMatrizes(A, B):
     size = len(A)
     sizeb = len(B[0])
-    M = [[0 for i in range(sizeb)] for j in range(size)]
+    print(size, sizeb)
+    M = [[0.0 for i in range(sizeb)] for j in range(size)]
     
     for i in range(size):
         for j in range(sizeb):
-            soma = 0
+            soma = 0.0
             for k in range(size):
                 soma += A[i][k] * B[k][j]
 
