@@ -75,7 +75,6 @@ def cartesiano(M):
 def mMatrizes(A, B):
     size = len(A)
     sizeb = len(B[0])
-    print(size, sizeb)
     M = [[0.0 for i in range(sizeb)] for j in range(size)]
     
     for i in range(size):
@@ -85,5 +84,4 @@ def mMatrizes(A, B):
                 soma += A[i][k] * B[k][j]
 
             M[i][j] = soma
-    print(M)
     return M
