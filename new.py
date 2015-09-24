@@ -5,10 +5,10 @@
     - PLOTAR
 
 '''
-from sys        import *
+from graphics   import *
 from math       import *
+from sys        import *
 import calculos
-import graphics
 
 def leObjeto(name):
     line = open(name, 'r').read()
@@ -25,10 +25,10 @@ def leObjeto(name):
             verticeaux = [float(s) for s in a[i].split(",") if s.isdigit()]
             vertices.append(verticeaux)
         elif (hasht == 1):
-            arestaaux = [float(s) for s in a[i].split(",") if s.isdigit()]
+            arestaaux = [int(s) for s in a[i].split(",") if s.isdigit()]
             arestas.append(arestaaux)
         else:
-            surfaux = [float(s) for s in a[i].split(",") if s.isdigit()]
+            surfaux = [int(s) for s in a[i].split(",") if s.isdigit()]
             superficies.append(surfaux)
 
     return vertices, arestas, superficies
@@ -71,8 +71,11 @@ def leParam():
     return C, ponto1, ponto2, ponto3, per
 
 def draw(arestas, P):
-    for a in arestas:
-        Line(Point(P[a[0]][0], P[a[0]][1]), Point(P[a[1]][0], P[a[1]][1]))
+    print(arestas)
+    for i in range(0, len(arestas[0])):
+        print(i)
+        Line(Point(P[0][arestas[0][i]], P[1][arestas[0][i]]),\
+                Point(P[0][arestas[1][i]], P[1][arestas[1][i]]))
 
 def main():
 # DEFAULTs
@@ -109,7 +112,7 @@ def main():
     P = calculos.mMatrizes(Mproj, v)
 
     # InitTela
-    GraphWin(filename, display[0], display[1])
+    GraphWin(f, display[0], display[1])
 
     # Desenha
     draw(a, P)
