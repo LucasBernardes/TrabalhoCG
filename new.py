@@ -1,8 +1,8 @@
 # TODO
 '''
-
-    - CALCULAR AS PARADA
-    - PLOTAR
+    - Normalização
+    - Consistência da Janela do Dispositivo (Display/win)
+    - Interface Gráfica
 
 '''
 from graphics   import *
@@ -71,26 +71,47 @@ def leParam():
     return C, ponto1, ponto2, ponto3, per
 
 def draw(w, arestas, P):
-    print(arestas)
     for i in range(0, len(arestas[0])):
-        print(i)
-        line = Line(Point(P[0][arestas[0][i]], P[1][arestas[0][i]]),\
-                Point(P[0][arestas[1][i]], P[1][arestas[1][i]]))
+        x = P[0][arestas[0][i]]/P[3][arestas[0][i]]
+        y = P[1][arestas[0][i]]/P[3][arestas[0][i]]
+        p1 = Point(x, y)
+
+        x = P[0][arestas[1][i]]/P[3][arestas[1][i]]
+        y = P[1][arestas[1][i]]/P[3][arestas[1][i]]
+        p2 = Point(x, y)
+
+        line = Line(p1, p2)
 
         line.setFill('white')
+        line.draw(w)
+
+def draw2(w, arestas, P):
+    for i in range(0, len(arestas[0])):
+        x = (-1) * P[0][arestas[0][i]]/P[3][arestas[0][i]]
+        y = P[1][arestas[0][i]]/P[3][arestas[0][i]]
+        p1 = Point(x, y)
+
+        x = (-1) * P[0][arestas[1][i]]/P[3][arestas[1][i]]
+        y = P[1][arestas[1][i]]/P[3][arestas[1][i]]
+        p2 = Point(x, y)
+
+        line = Line(p1, p2)
+
+        line.setFill('red')
         line.draw(w)
 
 def main():
 # DEFAULTs
     display = (300, 300)
 
-    viewC = (-20, -20, -50)
+    viewC = (4, 4, 10)
 
     pt1 = (0, 0, 0, 1)
     pt2 = (1, 0, 0, 1)
     pt3 = (0, 1, 0, 1)
 
-    pers = False
+    #pers    = True
+    pers   = False
 
 # Program
     f = str(raw_input("Nome do arquivo de objeto: "))
@@ -106,50 +127,28 @@ def main():
     Ds = calculos.calculoD(N, pt1, viewC)
     # Ds[0] = d0, Ds[1] = d1, Ds[2] = d
 
+    op = str(raw_input("Perspectiva? [S/N] "))
+
+    if op == "S":
+        pers = True
+    else:
+        pers = False
+   
     if pers:
-        Mproj = calculos.matPersp(N, viewC, Ds[2], Ds[0])
+        Mproj = calculos.matPersp(N, viewC, Ds[2], Ds[0], Ds[1])
     else:
         Mproj = calculos.matPar(N, viewC, Ds[0], Ds[1])
-
+    
     # Matriz P'
     P = calculos.mMatrizes(Mproj, v)
-
-    # Print debug
-    print(v)
-    print()
-    print(a)
-    print()
-    print(s)
-    print()
-    print(viewC)
-    print()
-    print(N)
-    print()
-    print(Ds)
-    print("come cu")
-    print(Mproj)
-    print()
-
-
+    
     # InitTela
     win = GraphWin(f, display[0], display[1])
     win.setBackground('black')
-    win.setCoords(-150, 150, 150, -150)
-    
+    win.setCoords(-8.0, 8.0, 8.0, -8.0)
+
     # Desenha
-    draw(win, a, P)
-    p1 = win.getMouse()
-    p1.setFill('white')
-    print(p1.getX(), p1.getY())
-    p2 = win.getMouse()
-    p2.setFill('white')
-    print(p2.getX(),p2.getY())
-    line = Line(p1, p2)
-    line.setFill('white')
-    line.setOutline('white')
-    p1.draw(win)
-    p2.draw(win)
-    line.draw(win)
+    draw2(win, a, P)
     win.getMouse()
 
 main()
