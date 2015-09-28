@@ -95,7 +95,6 @@ def mMatrizes(A, B):
 
             M[i][j] = soma
     return M
-
 def mapEspacoDispositivo(xmin,ymin,umin,vmin,M):
     sx = 0.0
     sy = 0.0
