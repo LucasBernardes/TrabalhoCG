@@ -141,7 +141,9 @@ def main():
     
     # Matriz P'
     P = calculos.mMatrizes(Mproj, v)
-    
+
+    #F = calculos.translacao(-5,-5,P)
+
     # InitTela
     win = GraphWin(f, display[0], display[1])
     win.setBackground('black')

@@ -95,3 +95,25 @@ def mMatrizes(A, B):
 
             M[i][j] = soma
     return M
+
+def mapEspacoDispositivo(xmin,ymin,umin,vmin,M):
+    sx = 0.0
+    sy = 0.0
+    
+    sx = (umax - umin)/(xmax - xmin)
+    sy = (vmax - vmin)/(ymax - ymin)
+
+    matED[0][0] = sx
+    matED[0][1] = 0 
+    matED[0][2] = ((-xmin*sx) + umin)
+
+    matED[1][0] = 0
+    matED[1][1] = sy
+    matED[1][2] = ((-ymin*sy) + vmin)
+
+    matED[2][0] = 0
+    matED[2][1] = 0
+    matED[2][2] = 1
+    
+    return mMatrizes(matED,M)
+    
