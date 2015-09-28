@@ -95,24 +95,51 @@ def mMatrizes(A, B):
 
             M[i][j] = soma
     return M
-def mapEspacoDispositivo(xmin,ymin,umin,vmin,M):
-    sx = 0.0
-    sy = 0.0
-    
-    sx = (umax - umin)/(xmax - xmin)
-    sy = (vmax - vmin)/(ymax - ymin)
+
+def minMax(M):
+    xmin = M[0][0]
+    xmax = M[0][0]
+    ymin = M[1][0]
+    ymax = M[1][0]
+                        
+    for i in range(1, len(M[0])):
+        if xmin > M[0][i]:
+            xmin = M[0][i]
+        if xmax < M[0][i]:
+            xmax = M[0][i]
+        if ymin > M[1][i]:
+            ymin = M[1][i]
+        if ymax < M[1][i]:
+            ymax = M[1][i]
+
+    return xmin, xmax, ymin, ymax
+
+def matED(xy, uv, M):    
+    sx = (uv[1] - uv[0])/(xy[1] - xy[0])
+    sy = (uv[3] - uv[2])/(xy[3] - xy[2])
+
+    matED = [[0 for i in range(4)] for j in range(4)]
 
     matED[0][0] = sx
-    matED[0][1] = 0 
-    matED[0][2] = ((-xmin*sx) + umin)
-
-    matED[1][0] = 0
-    matED[1][1] = sy
-    matED[1][2] = ((-ymin*sy) + vmin)
-
-    matED[2][0] = 0
-    matED[2][1] = 0
+    matED[0][2] = sx*xy[0]
+    matED[1][1] = -sy
+    matED[1][2] = -sy*xy[2]
     matED[2][2] = 1
+    matED[3][3] = 1
     
-    return mMatrizes(matED,M)
-    
+    return mMatrizes(matED, M)
+
+def coordenadas(M):
+    R = [[0 for i in range(len(M[0]))] for j in range(3)]
+
+    for i in range(3):
+        for j in range(len(M[0])):
+            if (i == 0 or i == 1):
+                if M[3][j] != 0:
+                    R[i][j] = M[i][j]/M[3][j]
+                else:
+                    R[i][j] = M[i][j]
+            if (i == 2):
+                R[i][j] = 1
+
+    return R
