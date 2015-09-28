@@ -1,6 +1,6 @@
 # TODO
 '''
-    - Interface Grafica
+    - Hide
 
 '''
 from graphics   import *

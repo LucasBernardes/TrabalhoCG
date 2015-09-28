@@ -1,23 +1,19 @@
 from Tkinter import *
 import ttk
-from new import *
-
-
-def draw():
-    pass
+from logic import *
 
 def init():
+    def quit():
+        root.quit()
+
     def setpersp1():
         global perspective
         perspective = 1
-        print('o valor da persp eh',perspective)
     def setpersp2():
         global perspective
         perspective = 2
-        print('o valor da persp eh',perspective)
 
     def plot():
-        print(perspective)
         if (perspective == 1):
             pers = True
         else:
@@ -106,7 +102,7 @@ def init():
     ttk.Label(mainframe, text="P3").grid(column=3, row=5, sticky=W)
 
     fl = ttk.Combobox(mainframe)
-    fl['values'] = ('cubo.txt', 'carro.txt')
+    fl['values'] = ('carro.txt', 'casa.txt', 'cubo.txt')
     fl.grid(column=2, row=8, columnspan=5, sticky=(W,E))
 
     ttk.Label(mainframe, text="Objeto").grid(column=1, row=8, sticky=W)
@@ -121,11 +117,11 @@ def init():
             Radiobutton(mainframe, text='Projetiva', variable=opt, command = setpersp2, \
             value=2).grid(column=4, row=9)
     
-            # AQUI ESTÀ O PROBLEMA DA RAPAZIADA
-
-
     button = ttk.Button(mainframe, text='Plottar', command=plot)
-    button.grid(column=3, row=10, columnspan=2)
+    button.grid(column=2, row=10, columnspan=2)
+
+    exit_button = ttk.Button(mainframe, text='Exit', command=quit)
+    exit_button.grid(column=5, row=10, columnspan=2)
 
     for child in mainframe.winfo_children():
         child.grid_configure(padx=5, pady=5)
