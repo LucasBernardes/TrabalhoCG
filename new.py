@@ -83,10 +83,10 @@ def draw(w, arestas, P):
         line.setFill('white')
         line.draw(w)
 
-def main():
+def display(viewC, pt1, pt2, pt3, pers, f):
 # DEFAULTs
     display = (300, 300)
-
+    '''
     viewC = (1.5, 1.5, 3)
 
     pt1 = (0, 0, 0, 1)
@@ -94,13 +94,13 @@ def main():
     pt3 = (0, 1, 0, 1)
 
     pers    = True
-
+    '''
 # Program
-    f = str(raw_input("Nome do arquivo de objeto: "))
+    #f = str(raw_input("Nome do arquivo de objeto: "))
     v, a, s = leObjeto(f)
 
     #Params default
-    viewC, pt1, pt2, pt3, pers = leParam()
+    #viewC, pt1, pt2, pt3, pers = leParam()
 
     # Calculo do vetor normal
     N = calculos.vetorNormal(pt1, pt2, pt3)
@@ -134,5 +134,3 @@ def main():
     # Desenha
     draw(win, a, R)
     win.getMouse()
-
-main()
